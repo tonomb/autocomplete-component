@@ -3,12 +3,14 @@ import React from "react";
 import "./App.css";
 import Autocomplete from "./components/Autocomplete";
 
+const defaultOptions = ["hello", "world"];
+
 function App() {
   return (
     <div className="App">
       <h1>Deel's Component Library</h1>
       <div>
-        <Autocomplete />
+        <Autocomplete options={defaultOptions} />
       </div>
     </div>
   );

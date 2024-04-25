@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-export default function Autocomplete() {
+type AutoCompleteProps = {
+  options: string[];
+};
+
+export default function Autocomplete({ options }: AutoCompleteProps) {
   const [modalVisibility, setModalVisibility] = useState(false);
 
   const handleModalDisplay = () => {
@@ -18,11 +22,9 @@ export default function Autocomplete() {
       {modalVisibility && (
         <div data-testid="autocomplete-modal">
           <ul>
-            <li>Option 1</li>
-            <li>Option 2</li>
-            <li>Option 3</li>
-            <li>Option 4</li>
-            <li>Option 5</li>
+            {options.map((option) => {
+              return <li key={option}>{option}</li>;
+            })}
           </ul>
         </div>
       )}
