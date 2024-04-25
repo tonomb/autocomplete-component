@@ -7,7 +7,7 @@ const defaultOptions = ["hello", "world"];
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" data-testid="body">
       <h1>Deel's Component Library</h1>
       <div>
         <Autocomplete options={defaultOptions} />

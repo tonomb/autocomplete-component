@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useOutsideClick } from "../hooks/useOutsideClick";
 
 type AutoCompleteProps = {
   options: string[];
@@ -7,12 +8,18 @@ type AutoCompleteProps = {
 export default function Autocomplete({ options }: AutoCompleteProps) {
   const [modalVisibility, setModalVisibility] = useState(false);
 
+  const ref = useOutsideClick(() => {
+    if (modalVisibility) {
+      setModalVisibility(!modalVisibility);
+    }
+  });
+
   const handleModalDisplay = () => {
     setModalVisibility(!modalVisibility);
   };
 
   return (
-    <form>
+    <div ref={ref}>
       <input
         type="text"
         data-testid="autocomplete-input"
@@ -28,6 +35,6 @@ export default function Autocomplete({ options }: AutoCompleteProps) {
           </ul>
         </div>
       )}
-    </form>
+    </div>
   );
 }
