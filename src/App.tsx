@@ -3,7 +3,14 @@ import React from "react";
 import "./App.css";
 import Autocomplete from "./components/Autocomplete";
 
-const defaultOptions = ["hello", "world"];
+const defaultOptions = [
+  "Apple",
+  "Ape",
+  "Banana",
+  "Pineapple",
+  "Watermelon",
+  "Appartment",
+];
 
 function App() {
   return (

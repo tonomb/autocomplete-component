@@ -1,5 +1,13 @@
 import Autocomplete from "./Autocomplete";
-import { fireEvent, render, screen, act } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  act,
+  waitFor,
+  findByText,
+} from "@testing-library/react";
+import { Simulate } from "react-dom/test-utils";
 
 describe("<Autocomplete />", () => {
   const testOptions = [
@@ -52,6 +60,26 @@ describe("<Autocomplete />", () => {
     testOptions.forEach((option) => {
       expect(screen.getByText(option)).toBeInTheDocument();
     });
+  });
+
+  it("should autocomplete when typing", async () => {
+    const autocompleteOptions = ["Apple", "Banana", "Pineapple", "Watermelon"];
+
+    renderComponent(autocompleteOptions);
+
+    await act(() => {
+      const input = screen.getByTestId("autocomplete-input");
+      fireEvent.click(input);
+
+      fireEvent.change(input, { target: { value: "app" } });
+    });
+
+    await (() => screen.getByText("Apple"));
+
+    expect(screen.getByText("Apple")).toBeInTheDocument();
+    expect(screen.queryByText("Banana")).not.toBeInTheDocument();
+    expect(screen.queryByText("Pineapple")).not.toBeInTheDocument();
+    expect(screen.queryByText("Watermelon")).not.toBeInTheDocument();
   });
 });
 
