@@ -9,9 +9,9 @@ type AutoCompleteProps = {
 const defaultInputValue = "";
 
 export default function Autocomplete({ options }: AutoCompleteProps) {
-  const [modalVisibility, setModalVisibility] = useState(false);
-  const [inputValue, setInputValue] = useState(defaultInputValue);
-  const [optionsCounter, setOptionsCounter] = useState(-1);
+  const [modalVisibility, setModalVisibility] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string>(defaultInputValue);
+  const [optionsCounter, setOptionsCounter] = useState<number>(-1);
   const [filteredOptions, setFilteredOptions] = useState<string[]>([]);
 
   useEffect(() => {
@@ -32,6 +32,7 @@ export default function Autocomplete({ options }: AutoCompleteProps) {
     }
   }, [inputValue, options]);
 
+  // Hook that handles closing the autocomplete modal with external clicks
   const ref = useOutsideClick(() => {
     if (modalVisibility) {
       setModalVisibility(!modalVisibility);
@@ -74,7 +75,6 @@ export default function Autocomplete({ options }: AutoCompleteProps) {
 
   function handleCursorHighlight(e: React.MouseEvent) {
     const indexValue = e.currentTarget.getAttribute("data-index");
-
     setOptionsCounter(Number(indexValue));
   }
 
