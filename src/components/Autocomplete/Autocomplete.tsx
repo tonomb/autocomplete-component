@@ -124,7 +124,7 @@ export default function Autocomplete({ options }: AutoCompleteProps) {
                       value={element}
                       style={{
                         backgroundColor:
-                          index === optionsCounter ? "#ece8e8" : undefined,
+                          index === optionsCounter ? "#F0F0F0" : undefined,
                       }}
                     >
                       <p>{highlightText(element)}</p>
