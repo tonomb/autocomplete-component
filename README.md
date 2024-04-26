@@ -2,7 +2,7 @@
 
 Project Created for Deel's Frontend Take Home assignment project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and typescript.
+Thank you Deel! 🙏
 
 ## Frontend test part 1
 
@@ -44,8 +44,7 @@ The exercise requires [Node.js](https://nodejs.org/en/) to be installed. We reco
 ## Technical Notes
 
 - The frontend was bootstrapped with [Create React App](https://facebook.github.io/create-react-app/docs/getting-started)
-
-Thank you Deel! 🙏
+- This project uses `yarn` as the package manager
 
 ## Available Scripts
 
