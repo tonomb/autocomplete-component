@@ -15,7 +15,7 @@ const defaultOptions = [
 function App() {
   return (
     <div className="App" data-testid="body">
-      <h1>Deel's Component Library</h1>
+      <h1 style={{ textAlign: "center" }}>Deel's Component Library</h1>
       <div>
         <Autocomplete options={defaultOptions} />
       </div>
