@@ -24,9 +24,9 @@ Please prepare an auto-complete component in React TypeScript.
 8. No external state management libraries (refer to #1 as well), only
    native React method.
 9. Use only functional components with hooks.
-   10.Shortcuts and hacks are ok - but you have to add comments on what
-   you are doing and why.
-10. Add a README.md file explaining how to run the project.
+10. Shortcuts and hacks are ok - but you have to add comments on what
+    you are doing and why.
+11. Add a README.md file explaining how to run the project.
     12.Bonus Point: Load data using a real API call to some resource.
 
 ## Frontend test part 2
