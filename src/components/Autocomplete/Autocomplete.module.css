@@ -34,3 +34,7 @@ li:hover {
   background-color: #ece8e8;
   border-radius: 4px;
 }
+
+.highlight {
+  background-color: rgb(27, 139, 236);
+}

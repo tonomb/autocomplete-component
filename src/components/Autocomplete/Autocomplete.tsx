@@ -70,8 +70,24 @@ export default function Autocomplete({ options }: AutoCompleteProps) {
     }
   };
 
-  const highlightText = () => {
-    console.log(inputValue);
+  const highlightText = (text: string) => {
+    const parts = text.split("");
+    const inputParts = inputValue.split("");
+
+    return parts.map((part, index) => {
+      if (
+        inputParts[index] !== undefined &&
+        part.toLocaleLowerCase() === inputParts[index].toLocaleLowerCase()
+      ) {
+        return (
+          <span key={index} className={styles.highlight}>
+            {part}
+          </span>
+        );
+      } else {
+        return part;
+      }
+    });
   };
 
   return (
@@ -111,7 +127,7 @@ export default function Autocomplete({ options }: AutoCompleteProps) {
                           index === optionsCounter ? "#ece8e8" : undefined,
                       }}
                     >
-                      <p>{element}</p>
+                      <p>{highlightText(element)}</p>
                     </li>
                   );
                 })}

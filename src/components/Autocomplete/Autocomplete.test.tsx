@@ -69,7 +69,10 @@ describe("<Autocomplete />", () => {
 
     await (() => screen.getByText("Apple"));
 
-    expect(screen.getByText("Apple")).toBeInTheDocument();
+    const autocompleteResults = screen.getByRole("listitem");
+    const highlightedText = autocompleteResults.textContent;
+
+    expect(highlightedText).toBe("Apple");
     expect(screen.queryByText("Banana")).not.toBeInTheDocument();
     expect(screen.queryByText("Pineapple")).not.toBeInTheDocument();
     expect(screen.queryByText("Watermelon")).not.toBeInTheDocument();
