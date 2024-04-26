@@ -12,18 +12,47 @@ export default function Autocomplete({ options }: AutoCompleteProps) {
   const [modalVisibility, setModalVisibility] = useState(false);
   const [inputValue, setInputValue] = useState(defaultInputValue);
   const [optionsCounter, setOptionsCounter] = useState(-1);
+  const [filteredOptions, setFilteredOptions] = useState<string[]>([]);
 
   useEffect(() => {
     if (inputValue === "") {
       setOptionsCounter(0);
+      setFilteredOptions(options);
+    } else {
+      filterAutocompleteOptions(options)
+        .then((data) => {
+          setFilteredOptions(data);
+        })
+        .catch((error) => {
+          console.log(
+            "An error ocurred when filtering the autocomplete",
+            error
+          );
+        });
     }
-  }, [inputValue]);
+  }, [inputValue, options]);
 
   const ref = useOutsideClick(() => {
     if (modalVisibility) {
       setModalVisibility(!modalVisibility);
     }
   });
+
+  function filterAutocompleteOptions(options: string[]): Promise<string[]> {
+    return new Promise((resolve) => {
+      const filtered = options.filter((element) => {
+        if (inputValue === "") {
+          return element;
+        } else {
+          return element
+            .toLocaleLowerCase()
+            .startsWith(inputValue.toLocaleLowerCase());
+        }
+      });
+
+      resolve(filtered);
+    });
+  }
 
   function handleModalDisplay() {
     setModalVisibility(!modalVisibility);
@@ -52,7 +81,7 @@ export default function Autocomplete({ options }: AutoCompleteProps) {
   function handleKeyEvents(e: React.KeyboardEvent) {
     if (e.key === "Enter") {
       if (modalVisibility) {
-        setInputValue(options[optionsCounter]);
+        setInputValue(filteredOptions[optionsCounter]);
         setModalVisibility(false);
       }
 
@@ -62,7 +91,7 @@ export default function Autocomplete({ options }: AutoCompleteProps) {
     }
 
     if (e.key === "ArrowDown") {
-      if (optionsCounter < options.length - 1) {
+      if (optionsCounter < filteredOptions.length - 1) {
         setOptionsCounter(optionsCounter + 1);
       }
     }
@@ -113,33 +142,23 @@ export default function Autocomplete({ options }: AutoCompleteProps) {
         {modalVisibility && (
           <div data-testid="autocomplete-modal" className={styles.modal}>
             <ul>
-              {options
-                .filter((element) => {
-                  if (inputValue === "") {
-                    return element;
-                  } else {
-                    return element
-                      .toLocaleLowerCase()
-                      .startsWith(inputValue.toLocaleLowerCase());
-                  }
-                })
-                .map((element, index) => {
-                  return (
-                    <li
-                      key={index}
-                      data-index={index}
-                      onClick={(e) => handleOptionClick(e)}
-                      value={element}
-                      style={{
-                        backgroundColor:
-                          index === optionsCounter ? "#F0F0F0" : undefined,
-                      }}
-                      onMouseEnter={(e) => handleCursorHighlight(e)}
-                    >
-                      <p>{highlightText(element)}</p>
-                    </li>
-                  );
-                })}
+              {filteredOptions.map((element, index) => {
+                return (
+                  <li
+                    key={index}
+                    data-index={index}
+                    onClick={(e) => handleOptionClick(e)}
+                    value={element}
+                    style={{
+                      backgroundColor:
+                        index === optionsCounter ? "#F0F0F0" : undefined,
+                    }}
+                    onMouseEnter={(e) => handleCursorHighlight(e)}
+                  >
+                    <p>{highlightText(element)}</p>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         )}

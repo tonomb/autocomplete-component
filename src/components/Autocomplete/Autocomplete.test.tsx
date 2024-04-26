@@ -60,7 +60,7 @@ describe("<Autocomplete />", () => {
 
     renderComponent(autocompleteOptions);
 
-    await act(() => {
+    await act(async () => {
       const input = screen.getByTestId("autocomplete-input");
       fireEvent.click(input);
 
