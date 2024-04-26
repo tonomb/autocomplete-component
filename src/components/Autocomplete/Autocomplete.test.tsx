@@ -1,13 +1,6 @@
+import { fireEvent, render, screen, act } from "@testing-library/react";
+
 import Autocomplete from "./Autocomplete";
-import {
-  fireEvent,
-  render,
-  screen,
-  act,
-  waitFor,
-  findByText,
-} from "@testing-library/react";
-import { Simulate } from "react-dom/test-utils";
 
 describe("<Autocomplete />", () => {
   const testOptions = [
@@ -83,6 +76,6 @@ describe("<Autocomplete />", () => {
   });
 });
 
-function renderComponent(options: any) {
+function renderComponent(options: string[]) {
   return render(<Autocomplete options={options} />);
 }

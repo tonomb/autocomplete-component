@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./App.css";
-import Autocomplete from "./components/Autocomplete";
+import Autocomplete from "./components/Autocomplete/Autocomplete";
 
 const defaultOptions = [
   "Apple",
