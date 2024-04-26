@@ -29,6 +29,10 @@ Please prepare an auto-complete component in React TypeScript.
 10. Add a README.md file explaining how to run the project.
     12.Bonus Point: Load data using a real API call to some resource.
 
+## Frontend test part 2
+
+Questions can be found answered in the `questions.md` file
+
 ## Running App
 
 The exercise requires [Node.js](https://nodejs.org/en/) to be installed. We recommend using the LTS version.
