@@ -61,20 +61,17 @@ export default function Autocomplete({ options }: AutoCompleteProps) {
       }
     }
 
-    // arrow down
-    if (e.keyCode === 40) {
+    if (e.key === "ArrowDown") {
       if (optionsCounter < options.length - 1) {
         setOptionsCounter(optionsCounter + 1);
       }
     }
 
-    // arrow up
-    if (e.keyCode === 38) {
+    if (e.key === "ArrowUp") {
       if (optionsCounter !== 0) setOptionsCounter(optionsCounter - 1);
     }
 
-    // escape key
-    if (e.keyCode === 27) {
+    if (e.key === "Escape") {
       setModalVisibility(false);
       setOptionsCounter(0);
     }
