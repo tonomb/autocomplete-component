@@ -2,3 +2,9 @@
   box-sizing: border-box;
   padding: 16px;
 }
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 36px;
+}
