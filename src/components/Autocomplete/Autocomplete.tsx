@@ -25,21 +25,31 @@ export default function Autocomplete({ options }: AutoCompleteProps) {
     }
   });
 
-  const handleModalDisplay = () => {
+  function handleModalDisplay() {
     setModalVisibility(!modalVisibility);
-  };
+  }
 
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
     setModalVisibility(true);
     setInputValue(e.target.value);
-  };
+  }
 
-  const handleOptionClick = (e: any) => {
+  function handleOptionClick(e: React.MouseEvent) {
     const value = e.currentTarget.getAttribute("value");
-    setInputValue(value);
-  };
+    if (value !== null) {
+      setInputValue(value);
+    } else {
+      setInputValue("");
+    }
+  }
 
-  const handleKeyEvents = (e: any) => {
+  function handleCursorHighlight(e: React.MouseEvent) {
+    const indexValue = e.currentTarget.getAttribute("data-index");
+
+    setOptionsCounter(Number(indexValue));
+  }
+
+  function handleKeyEvents(e: React.KeyboardEvent) {
     if (e.key === "Enter") {
       if (modalVisibility) {
         setInputValue(options[optionsCounter]);
@@ -68,9 +78,9 @@ export default function Autocomplete({ options }: AutoCompleteProps) {
       setModalVisibility(false);
       setOptionsCounter(0);
     }
-  };
+  }
 
-  const highlightText = (text: string) => {
+  function highlightText(text: string) {
     const parts = text.split("");
     const inputParts = inputValue.split("");
 
@@ -88,7 +98,7 @@ export default function Autocomplete({ options }: AutoCompleteProps) {
         return part;
       }
     });
-  };
+  }
 
   return (
     <div ref={ref}>
@@ -119,13 +129,15 @@ export default function Autocomplete({ options }: AutoCompleteProps) {
                 .map((element, index) => {
                   return (
                     <li
-                      key={element}
+                      key={index}
+                      data-index={index}
                       onClick={(e) => handleOptionClick(e)}
                       value={element}
                       style={{
                         backgroundColor:
                           index === optionsCounter ? "#F0F0F0" : undefined,
                       }}
+                      onMouseEnter={(e) => handleCursorHighlight(e)}
                     >
                       <p>{highlightText(element)}</p>
                     </li>
