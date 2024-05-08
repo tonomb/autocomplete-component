@@ -11,7 +11,7 @@ const defaultInputValue = "";
 export default function Autocomplete({ options }: AutoCompleteProps) {
   const [modalVisibility, setModalVisibility] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>(defaultInputValue);
-  const [optionsCounter, setOptionsCounter] = useState<number>(-1);
+  const [optionsCounter, setOptionsCounter] = useState<number>(-1); // Used to keep track of keyboard input
   const [filteredOptions, setFilteredOptions] = useState<string[]>([]);
 
   useEffect(() => {
@@ -40,6 +40,7 @@ export default function Autocomplete({ options }: AutoCompleteProps) {
   });
 
   function filterAutocompleteOptions(options: string[]): Promise<string[]> {
+    // This is used to simulate the async from an api
     return new Promise((resolve) => {
       const filtered = options.filter((element) => {
         if (inputValue === "") {

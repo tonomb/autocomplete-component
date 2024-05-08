@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import "./App.css";
 import Autocomplete from "./components/Autocomplete/Autocomplete";
+import AutocompleteClass from "./components/Autocomplete/AutocompleteClass";
 
 const defaultOptions = [
   "Apple",
@@ -27,13 +28,15 @@ function App() {
   async function getPokemon() {
     try {
       const response = await fetch(
-        "https://pokeapi.co/api/v2/pokemon?limit=15&offset=0"
+        "https://pokeapi.co/api/v2/pokemon?&offset=0"
       );
       const pokemon = await response.json();
 
       const cleanPokemon = pokemon.results.map((pokemon: PokemonResult) => {
         return pokemon.name;
       });
+
+      console.log(cleanPokemon);
 
       setPokemonOptions(cleanPokemon);
     } catch (error) {
@@ -49,6 +52,10 @@ function App() {
         <div>
           <h3>Autocomplete Component with default options</h3>
           <Autocomplete options={defaultOptions} />
+        </div>
+        <div>
+          <h3>Autocomplete Class Component with default options</h3>
+          <AutocompleteClass options={defaultOptions} />
         </div>
         <div>
           <h3>Autocomplete Component with Pokemon Api</h3>
