@@ -53,10 +53,10 @@ function App() {
           <h3>Autocomplete Component with default options</h3>
           <Autocomplete options={defaultOptions} />
         </div>
-        <div>
+        {/* <div>
           <h3>Autocomplete Class Component with default options</h3>
           <AutocompleteClass options={defaultOptions} />
-        </div>
+        </div> */}
         <div>
           <h3>Autocomplete Component with Pokemon Api</h3>
           <Autocomplete options={pokemonOptions} />
